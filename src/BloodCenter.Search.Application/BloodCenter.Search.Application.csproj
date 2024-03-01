@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="7.1.0" />
+    <PackageReference Include="BloodCenter.Identity.Client" Version="1.0.4" />
+    <PackageReference Include="BloodCenter.Identity.Events" Version="1.0.1" />
+    <PackageReference Include="Feree.ResultType" Version="1.3.6" />
+    <PackageReference Include="MassTransit" Version="8.1.3" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BloodCenter.Search.Client\BloodCenter.Search.Client.csproj" />
+    <ProjectReference Include="..\BloodCenter.Search.Domain\BloodCenter.Search.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
