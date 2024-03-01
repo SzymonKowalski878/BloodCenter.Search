@@ -58,14 +58,14 @@ namespace BloodCenter.Search.IntegrationTests.User
 
             result.Count.ShouldBeGreaterThanOrEqualTo(data.Count());
 
-            foreach(var item in result)
+            foreach(var item in data)
             {
-                var findMatchingItem = data.FirstOrDefault(x => x.Id == item.Id.ToString());
+                var findMatchingItem = result.FirstOrDefault(x => x.Id.ToString() == item.Id);
                 findMatchingItem.ShouldNotBeNull();
                 findMatchingItem.Role.ShouldBe(item.Role);
-                findMatchingItem.Role.ShouldBe(item.FirstName);
-                findMatchingItem.Role.ShouldBe(item.Email);
-                findMatchingItem.Role.ShouldBe(item.LastName);
+                findMatchingItem.FirstName.ShouldBe(item.FirstName);
+                findMatchingItem.Email.ShouldBe(item.Email);
+                findMatchingItem.LastName.ShouldBe(item.LastName);
 
             }
         }
