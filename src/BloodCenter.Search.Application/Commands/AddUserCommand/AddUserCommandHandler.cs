@@ -20,7 +20,9 @@ namespace BloodCenter.Search.Application.Commands.AddUserCommand
             {
                 Id = request.request.Id.ToString() ?? Guid.NewGuid().ToString(),
                 Email = request.request.Email,
-                Role = request.request.Role
+                Role = request.request.Role,
+                FirstName = request.request.FirstName,
+                LastName = request.request.LastName
             }, cancellationToken);
         }
     }

@@ -32,6 +32,7 @@ namespace BloodCenter.Search.IntegrationTests.Infrastructure
             }
 
             await _elasticClient.BulkAsync(new BulkRequest { Operations = operations, Refresh = Refresh.WaitFor });
+            await Task.Delay(TimeSpan.FromSeconds(1));
         }
 
         public void AddDocumentIdToBeRemoved(Guid id)
@@ -61,6 +62,7 @@ namespace BloodCenter.Search.IntegrationTests.Infrastructure
                             .Field(f => f.Id.Suffix("keyword"))
                             .Terms(_ids.ToArray())))
                     .Index(_index));
+                await Task.Delay(TimeSpan.FromSeconds(2));
             }
         }
 
@@ -74,6 +76,7 @@ namespace BloodCenter.Search.IntegrationTests.Infrastructure
                             .Field(f => f.Id.Suffix("keyword"))
                             .Terms(_ids.ToArray())))
                     .Index(_index));
+                await Task.Delay(TimeSpan.FromSeconds(2));
             }
         }
     }
