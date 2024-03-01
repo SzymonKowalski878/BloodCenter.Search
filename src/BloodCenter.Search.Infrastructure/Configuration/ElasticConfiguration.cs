@@ -2,9 +2,6 @@
 {
     public class ElasticConfiguration
     {
-        public static IndexConfiguration UserDocument { get; } = new()
-        {
-            IndexName = "user-index",
-        };
+        public static IndexConfiguration UserDocument { get; } = new("user-index");
     }
 }
