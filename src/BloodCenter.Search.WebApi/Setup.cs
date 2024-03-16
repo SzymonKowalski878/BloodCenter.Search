@@ -150,6 +150,7 @@ namespace BloodCenter.Search.WebApi
                         cfg.ConfigureEndpoints(context);
                     });
                 });
+                services.RemoveMassTransitHostedService();
             }
             else
             {
@@ -169,7 +170,7 @@ namespace BloodCenter.Search.WebApi
                     });
                 });
 
-                services.RemoveMassTransitHostedService();
+                //
             }
             
         }
