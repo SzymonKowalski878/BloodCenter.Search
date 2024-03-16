@@ -60,7 +60,7 @@ namespace BloodCenter.Search.IntegrationTests.User
 
             foreach(var item in data)
             {
-                var findMatchingItem = result.FirstOrDefault(x => x.Id.ToString() == item.Id);
+                var findMatchingItem = data.FirstOrDefault(x => x.Id == item.Id);
                 findMatchingItem.ShouldNotBeNull();
                 findMatchingItem.Role.ShouldBe(item.Role);
                 findMatchingItem.FirstName.ShouldBe(item.FirstName);
