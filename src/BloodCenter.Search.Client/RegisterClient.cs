@@ -6,7 +6,7 @@ namespace BloodCenter.Search.Client
 {
     public static class RegisterClient
     {
-        public static IServiceCollection AddIdentityClient(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddSearchClient(this IServiceCollection services, IConfiguration configuration)
         {
             return services
                 .AddClient<ISearchClient, SearchClient>(configuration, "search-client");

@@ -1,0 +1,32 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 7.x
+    - name: Build and Publish
+      run: |
+          dotnet build --configuration Release
+          dotnet pack --configuration Release
+      env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    - name: Publish to NuGet
+      run: |
+          for package in **/bin/Release/*.nupkg
+          do
+            dotnet nuget push "$package" --source https://api.nuget.org/v3/index.json --api-key $NUGET_API_KEY  --skip-duplicate
+          done
+      env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}

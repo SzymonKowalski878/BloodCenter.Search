@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
+	<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
