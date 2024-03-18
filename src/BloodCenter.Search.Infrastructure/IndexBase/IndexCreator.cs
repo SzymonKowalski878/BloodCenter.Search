@@ -22,14 +22,17 @@ namespace BloodCenter.Search.Infrastructure.IndexBase
 
             if (!indexExists.Exists)
             {
+
+                var indexDescriptor = new CreateIndexDescriptor(ElasticConfiguration.UserDocument.IndexName)
+                    .Map(m => m.AutoMap<T>());
+
                 try
                 {
-                    await _client.Indices.CreateAsync(ElasticConfiguration.UserDocument.IndexName, c => c
-                        .Map<T>(m => m.AutoMap<T>()));
+                    await _client.Indices.CreateAsync(indexDescriptor);
                 }
                 catch (Exception ex)
                 {
-                    return ResultFactory.CreateFailure("Failure during index creatiozn: " + ex.Message);
+                    return ResultFactory.CreateFailure("Failure during index creation: " + ex.Message);
                 }
             }
             else

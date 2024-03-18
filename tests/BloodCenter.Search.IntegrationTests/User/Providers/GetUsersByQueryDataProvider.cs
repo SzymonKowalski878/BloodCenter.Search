@@ -39,6 +39,22 @@ namespace BloodCenter.Search.IntegrationTests.User.Providers
                     Email = "dgasjd@gmai312l.com",
                     Role = "Admin"
                 },
+                new UserDocument
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    FirstName = "dasda2132jdfgiuas1",
+                    LastName = "disagdujas32dgusa141",
+                    Email = "ighuiysdguidasd@gmai312l.com",
+                    Role = "Worker"
+                },
+                new UserDocument
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    FirstName = "ksdahdyuiasgduyasgduia",
+                    LastName = "iyasgdiosaygduasygbdas",
+                    Email = "dashbdukasbudsa@gmai312l.com",
+                    Role = "Worker"
+                },
             };
         }
     }

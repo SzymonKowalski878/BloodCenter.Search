@@ -5,6 +5,6 @@ namespace BloodCenter.Search.Client
 {
     public interface ISearchClient
     {
-        Task<IResult<IReadOnlyList<UserDocumentDto>>> GetUsersByQuery(GetUsersByQueryRequestDto request);
+        Task<IResult<IReadOnlyList<UserDocumentDto>>> GetUsersByQuery(GetUsersRequestDto request);
     }
 }

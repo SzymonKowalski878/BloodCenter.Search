@@ -1,5 +1,5 @@
 ﻿using BloodCenter.Search.Application.Commands.AddUserCommand;
-using BloodCenter.Search.Application.Queries.GetUsersByQquery;
+using BloodCenter.Search.Application.Queries.GetUsers;
 using BloodCenter.Search.Client.Models;
 using Feree.ResultType;
 using Feree.ResultType.Results;
@@ -39,8 +39,8 @@ namespace BloodCenter.Search.WebApi.Controllers
         }
 
         [HttpPost("search")]
-        public Task<IActionResult> GetUsersByQuery([FromBody] GetUsersByQueryRequestDto request) =>
-            SendReqeust(new GetUsersByQueryQuery(request));
+        public Task<IActionResult> GetUsersByQuery([FromBody] GetUsersRequestDto request) =>
+            SendReqeust(new GetUsersQuery(request));
         /*
         {
             try

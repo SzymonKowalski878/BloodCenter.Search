@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using BloodCenter.Search.Application.Commands.AddUserCommand;
-using BloodCenter.Search.Application.Queries.GetUsersByQquery;
+using BloodCenter.Search.Application.Queries.GetUsers;
 
 namespace BloodCenter.Search.Application
 {
@@ -19,7 +19,7 @@ namespace BloodCenter.Search.Application
 
         private static void RegisterQurydHandlers(ContainerBuilder builder)
         {
-            builder.RegisterType<GetUsersByQueryQueryHandler>().AsImplementedInterfaces();
+            builder.RegisterType<GetUsersQueryHandler>().AsImplementedInterfaces();
         }
     }
 }

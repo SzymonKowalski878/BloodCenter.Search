@@ -11,8 +11,8 @@ namespace BloodCenter.Search.Client
         {
         }
 
-        public Task<IResult<IReadOnlyList<UserDocumentDto>>> GetUsersByQuery(GetUsersByQueryRequestDto request) =>
-            SendPostAsync<GetUsersByQueryRequestDto, CustomActionResult<IReadOnlyList<UserDocumentDto>>>("api/user/search", request)
+        public Task<IResult<IReadOnlyList<UserDocumentDto>>> GetUsersByQuery(GetUsersRequestDto request) =>
+            SendPostAsync<GetUsersRequestDto, CustomActionResult<IReadOnlyList<UserDocumentDto>>>("api/user/search", request)
                 .BindAsync(response => ExtractResult(response));
 
 

@@ -6,22 +6,22 @@ using Feree.ResultType.Factories;
 using Feree.ResultType.Results;
 using Nest;
 
-namespace BloodCenter.Search.Application.Queries.GetUsersByQquery
+namespace BloodCenter.Search.Application.Queries.GetUsers
 {
-    public class GetUsersByQueryQueryHandler : MediatR.IRequestHandler<GetUsersByQueryQuery, IResult<IReadOnlyList<UserDocumentDto>>>
+    public class GetUsersQueryHandler : MediatR.IRequestHandler<GetUsersQuery, IResult<IReadOnlyList<UserDocumentDto>>>
     {
         private readonly IUserQueryBuilder _userQueryBuilder;
         private readonly IElasticClient _elasticClient;
 
-        public GetUsersByQueryQueryHandler(IElasticClient elasticClient, IUserQueryBuilder userQueryBuilder)
+        public GetUsersQueryHandler(IElasticClient elasticClient, IUserQueryBuilder userQueryBuilder)
         {
             _elasticClient = elasticClient;
             _userQueryBuilder = userQueryBuilder;
         }
 
-        public async Task<IResult<IReadOnlyList<UserDocumentDto>>> Handle(GetUsersByQueryQuery request, CancellationToken cancellationToken)
+        public async Task<IResult<IReadOnlyList<UserDocumentDto>>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var query = _userQueryBuilder.GetByQuery(request.request.QueryString);
+            var query = _userQueryBuilder.GetByQuery(request.Request.QueryString, request.Request.Roles);
 
             var response = await _elasticClient.SearchAsync<UserDocument>(query);
 
