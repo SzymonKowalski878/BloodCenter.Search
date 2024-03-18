@@ -15,7 +15,7 @@ using Xunit;
 
 namespace BloodCenter.Search.IntegrationTests.User
 {
-    public class GetUsersByQuery : IClassFixture<GetUsersByQuery.Fixture>
+    public class GetUsers : IClassFixture<GetUsers.Fixture>
     {
         private readonly Fixture _fixture;
 
@@ -29,22 +29,60 @@ namespace BloodCenter.Search.IntegrationTests.User
             }
         }
 
-        public GetUsersByQuery(Fixture fixture)
+        public GetUsers(Fixture fixture)
         {
             _fixture = fixture;
         }
 
+        
         [Fact]
-        public async Task GetUsersByQuery_GivenIdQueryString_ShouldReturnResult()
+        public async Task GetUsersByQuery_GivenWorkerRole_ShouldReturnResult()
         {
+            var roles = new string[] { "Worker" };
+
             var userId = _fixture.DataProvider.UserId;
 
-            var response = await _fixture.ApiClient.GetUsersByQuery(new Client.Models.GetUsersByQueryRequestDto(userId.ToString()));
+            var response = await _fixture.ApiClient.GetUsersByQuery(new Client.Models.GetUsersRequestDto(null, roles));
 
             var result = response.ShouldBeOfType<Success<IReadOnlyList<UserDocumentDto>>>().Payload;
 
-            result.Count.ShouldBe(1);
-            result.First().Id.ShouldBe(userId);
+            result.Count().ShouldBeGreaterThan(0);
+            foreach(var item in result)
+            {
+                roles.Contains(item.Role).ShouldBeTrue();
+            }
+        }
+
+        [Fact]
+        public async Task GetUsersByQuery_GivenAdminRole_ShouldReturnResult()
+        {
+            var roles = new string[] { "Admin" };
+
+            var userId = _fixture.DataProvider.UserId;
+
+            var response = await _fixture.ApiClient.GetUsersByQuery(new Client.Models.GetUsersRequestDto(null, roles));
+
+            var result = response.ShouldBeOfType<Success<IReadOnlyList<UserDocumentDto>>>().Payload;
+
+            result.Count().ShouldBeGreaterThan(0);
+            foreach (var item in result)
+            {
+                roles.Contains(item.Role).ShouldBeTrue();
+            }
+        }
+
+        [Fact]
+        public async Task GetUsersByQuery_GivenRandomRole_ShouldReturnEmptyResult()
+        {
+            var roles = new string[] { "Random" };
+
+            var userId = _fixture.DataProvider.UserId;
+
+            var response = await _fixture.ApiClient.GetUsersByQuery(new Client.Models.GetUsersRequestDto(null, roles));
+
+            var result = response.ShouldBeOfType<Success<IReadOnlyList<UserDocumentDto>>>().Payload;
+
+            result.Count().ShouldBe(0);
         }
 
         [Fact]
@@ -52,7 +90,7 @@ namespace BloodCenter.Search.IntegrationTests.User
         {
             var data = _fixture.DataProvider.Documents;
 
-            var response = await _fixture.ApiClient.GetUsersByQuery(new(null));
+            var response = await _fixture.ApiClient.GetUsersByQuery(new(null, null));
 
             var result = response.ShouldBeOfType<Success<IReadOnlyList<UserDocumentDto>>>().Payload;
 
